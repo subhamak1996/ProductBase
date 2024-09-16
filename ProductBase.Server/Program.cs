@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ProductBase.Data;
+using ProductBase.Server.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ProdectDetailesDBContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("ProductConnString")));
-
+builder.Services.AddScoped<IRegistrationRepo, RegistrationRepo>();
 var app = builder.Build();
 
 app.UseDefaultFiles();
