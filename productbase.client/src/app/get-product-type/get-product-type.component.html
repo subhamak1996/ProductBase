@@ -1,0 +1,27 @@
+<!-- product-type.component.html -->
+  <h2>Product Types</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product Type Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let productType of productTypes">
+        <td>{{ productType.PTId }}</td>
+        <td>{{ productType.ProductTypeName }}</td>
+        <td>{{ productType.ProductTypeDescription }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+<!--<ng-template #noData>
+  <p>No product types available.</p>
+</ng-template>-->
+
+<!-- Show an error message if data could not be loaded -->
+<!--<div *ngIf="errorMessage">
+  <p class="error">{{ errorMessage }}</p>
+</div>-->

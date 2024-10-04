@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
 using ProductBase.Data;
@@ -12,17 +13,19 @@ namespace ProductBase.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class RegistrationsController : ControllerBase
     {
         private readonly IRegistrationRepo _registrationRepo;
         private readonly ProdectDetailesDBContext _context;
 
-        public RegistrationsController(IRegistrationRepo registrationRepo )
+        public RegistrationsController(IRegistrationRepo registrationRepo)
         {
             _registrationRepo = registrationRepo;
         }
 
         [HttpGet]
+       // [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Regestration>>> GetRegistrations()
         {
             var registrations = await _registrationRepo.GetAllAsync();

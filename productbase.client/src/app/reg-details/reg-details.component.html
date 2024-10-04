@@ -1,1 +1,60 @@
-<p>reg-details works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="form-container">
+        <h2 class="text-center">Register</h2>
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="UserName">User Name</label>
+            <input type="text" class="form-control" id="UName" formControlName="UserName" required>
+            <div *ngIf="registrationForm.get('UserName')?.invalid && registrationForm.get('UserName')?.touched">
+              <small class="text-danger">User name is required</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="EmailId">Email address</label>
+            <input type="email" class="form-control" id="EmailId" formControlName="EmailId" required>
+            <div *ngIf="registrationForm.get('EmailId')?.invalid && registrationForm.get('EmailId')?.touched">
+              <small class="text-danger">Valid email is required</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="MobileNo">Mobile No</label>
+            <input type="text" class="form-control" id="MobileNo" formControlName="MobileNo" required>
+            <div *ngIf="registrationForm.get('MobileNo')?.invalid && registrationForm.get('MobileNo')?.touched">
+              <small class="text-danger">Mobile number is required and should be 10 digits</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="Password">Password</label>
+            <input type="password" class="form-control" id="Password" formControlName="Password" required>
+            <div *ngIf="registrationForm.get('Password')?.invalid && registrationForm.get('Password')?.touched">
+              <small class="text-danger">Password must be at least 6 characters</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required>
+            <div *ngIf="registrationForm.hasError('mismatch') && registrationForm.get('confirmPassword')?.touched">
+              <small class="text-danger">Passwords do not match</small>
+            </div>
+          </div>
+
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="terms" formControlName="terms" required>
+            <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
+            <div *ngIf="registrationForm.get('terms')?.invalid && registrationForm.get('terms')?.touched">
+              <small class="text-danger">You must agree to the terms</small>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="registrationForm.invalid">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,9 +13,18 @@ interface WeatherForecast {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
+  //Start @input parant to child
+  inputdata = "data passed from parant to child";
+  //End @input parant to child
+  //Start @output child to parant
+  Outputdatapass = "X";
+  outputdata(item: string) {
+    this.Outputdatapass = item;
+  }
+  //End @output child to parant
   public forecasts: WeatherForecast[] = [];
-
+  
   constructor(private http: HttpClient) {}
 
   ngOnInit() {

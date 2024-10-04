@@ -1,24 +1,55 @@
-﻿<h1 id="tableLabel">Weather forecast</h1>
+<!-- Example of a responsive navbar and a hero section using Bootstrap -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <!-- Brand (Ugaoo) -->
+    <a class="navbar-brand" href="#">Ugaoo</a>
 
-<p>This component demonstrates fetching data from the server.</p>
+    <!-- Navbar Toggler (for mobile view) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<p *ngIf="!forecasts"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
+    <!-- Collapsible Menu Items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Plants</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Seeds</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pots & Planters</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Plant Care</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Gifting</a>
+        </li>
+      </ul>
+    </div>
 
-<table *ngIf="forecasts">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.date }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
-        </tr>
-    </tbody>
-</table>
+    <!-- Right-side Icons or Additional Content (like currency, cart) -->
+    <div class="d-flex align-items-center">
+      <span class="me-3">₹</span>
+      <a class="btn btn-outline-dark" routerLink="/RegDetails">Sign up</a>
+    </div>
+    <div class="d-flex align-items-center">
+      <span class="me-3">₹</span>
+      <a class="btn btn-outline-dark" routerLink="/ProductType">Product Type</a>
+    </div>
+
+  </div>
+</nav>
+<app-get-product-type></app-get-product-type>
+<router-outlet></router-outlet>
+
+<inputcomp [item]="inputdata"></inputcomp>
+
+<h1>child to parent data->{{Outputdatapass}}</h1>
+<outputcomp (outputdataevent)="outputdata($event)"></outputcomp>
+
+
+
+

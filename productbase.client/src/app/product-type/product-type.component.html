@@ -1,0 +1,17 @@
+<!-- product-type.component.html -->
+<div>
+  <h2>Insert New Product Type</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Product Type Name:</label>
+      <input type="text" id="name" [(ngModel)]="productType.ProductTypeName" name="ProductTypeName" required>
+    </div>
+
+    <div>
+      <label for="description">Product Type Description:</label>
+      <textarea id="description" [(ngModel)]="productType.ProductTypeDescription" name="ProductTypeDescription" required></textarea>
+    </div>
+
+    <button type="submit">Insert Product Type</button>
+  </form>
+</div>

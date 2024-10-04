@@ -1,22 +1,24 @@
-﻿:host {
-    max-width: 1280px;
-    padding: 2rem;
-    text-align: center;
+/* app.component.css */
+.navbar {
+  margin-bottom: 20px; /* Space below the navbar */
 }
 
-tr:nth-child(even) {
-    background: #F2F2F2;
+.navbar-nav {
+  display: flex; /* Ensure flexbox layout */
 }
 
-tr:nth-child(odd) {
-    background: #FFF;
+.nav-item {
+  margin-right: 15px; /* Space between nav items */
 }
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.form-inline {
+  display: flex;
 }
 
-table {
-    margin: 0 auto;
+.form-control {
+  width: auto; /* Adjust width of the search bar */
+}
+
+.btn {
+  margin-left: 10px; /* Space between search button and other items */
 }

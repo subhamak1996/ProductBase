@@ -21,14 +21,11 @@ namespace ProductBase.Server.Controllers
             _context = context;
         }
 
-        // GET: api/ProductTypes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductType>>> Getproducttype()
         {
             return await _context.producttype.ToListAsync();
         }
-
-        // GET: api/ProductTypes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductType>> GetProductType(Guid id)
         {
