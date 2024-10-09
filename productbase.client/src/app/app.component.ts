@@ -15,12 +15,12 @@ interface WeatherForecast {
 })
 export class AppComponent  {
   //Start @input parant to child
-  inputdata = "data passed from parant to child";
+  data = "Hi this is parant to child";
   //End @input parant to child
   //Start @output child to parant
-  Outputdatapass = "X";
-  outputdata(item: string) {
-    this.Outputdatapass = item;
+  outputresult = "X";
+  outputdata(item:string) {
+    this.outputresult = item;
   }
   //End @output child to parant
   public forecasts: WeatherForecast[] = [];

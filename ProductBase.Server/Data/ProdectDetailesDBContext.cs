@@ -19,10 +19,10 @@ namespace ProductBase.Data
         public DbSet<Regestration> Reg { get; set; }
         public DbSet<ProductDetails> productdetails { get; set; }
         public DbSet<ProductType> producttype { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ProductType>()
-                .HasKey(p => p.PTId);
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<ProductType>()
+        //        .HasKey(p => p.PTId);
+        //}
     }
 }

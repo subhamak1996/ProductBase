@@ -6,5 +6,5 @@ import { Component,Input } from '@angular/core';
   styleUrl: './input-comp.component.css'
 })
 export class InputCompComponent {
-  @Input() item = "";
+  @Input() item: string | undefined;
 }

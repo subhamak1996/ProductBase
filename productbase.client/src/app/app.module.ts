@@ -8,8 +8,10 @@ import { RegDetailsComponent } from './reg-details/reg-details.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ProductTypeComponent } from './product-type/product-type.component';
 import { GetProductTypeComponent } from './get-product-type/get-product-type.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 import { InputCompComponent } from './input-comp/input-comp.component';
-import { OutputcompComponent } from './outputcomp/outputcomp.component';
+import { OutputCompComponent } from './output-comp/output-comp.component';
+import { GetProductDetailsComponent } from './get-product-details/get-product-details.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,10 @@ import { OutputcompComponent } from './outputcomp/outputcomp.component';
     RegDetailsComponent,
     ProductTypeComponent,
     GetProductTypeComponent,
+    ProductDetailsComponent,
     InputCompComponent,
-    OutputcompComponent,
+    OutputCompComponent,
+    GetProductDetailsComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

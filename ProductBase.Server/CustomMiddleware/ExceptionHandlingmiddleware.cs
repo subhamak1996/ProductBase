@@ -17,7 +17,7 @@ namespace ProductBase.Server.CustomMiddleware
         {
             try
             {
-                await _next(httpContext); // Call the next middleware
+                await _next(httpContext); 
             }
             catch (Exception ex)
             {

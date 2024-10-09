@@ -1,37 +1,34 @@
 <!-- Example of a responsive navbar and a hero section using Bootstrap -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid d-flex justify-content-between align-items-center">
-    <!-- Brand (Ugaoo) -->
-    <a class="navbar-brand" href="#">Ugaoo</a>
-
-    <!-- Navbar Toggler (for mobile view) -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Collapsible Menu Items -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Plants</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Seeds</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pots & Planters</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Plant Care</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Gifting</a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Right-side Icons or Additional Content (like currency, cart) -->
-    <div class="d-flex align-items-center">
+ Brand (Ugaoo) 
+<a class="navbar-brand" href="#">Ugaoo</a>
+ Navbar Toggler (for mobile view) 
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+ Collapsible Menu Items 
+<div class="collapse navbar-collapse" id="navbarNav">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Plants</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Seeds</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Pots & Planters</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Plant Care</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Gifting</a>
+    </li>
+  </ul>
+</div>
+ Right-side Icons or Additional Content (like currency, cart) 
+<div class="d-flex align-items-center">
       <span class="me-3">₹</span>
       <a class="btn btn-outline-dark" routerLink="/RegDetails">Sign up</a>
     </div>
@@ -39,17 +36,87 @@
       <span class="me-3">₹</span>
       <a class="btn btn-outline-dark" routerLink="/ProductType">Product Type</a>
     </div>
-
+    <div class="d-flex align-items-center">
+      <span class="me-3">₹</span>
+      <a class="btn btn-outline-dark" routerLink="/ProductDetails">Product Details</a>
+    </div>
   </div>
 </nav>
-<app-get-product-type></app-get-product-type>
 <router-outlet></router-outlet>
+<!--<inputcomp [item]="data"></inputcomp>ng build
 
-<inputcomp [item]="inputdata"></inputcomp>
+<h1>outputdata={{outputresult}}</h1>
+<outputcomp (Outpuddataevent)="outputdata($event)"></outputcomp>-->
+<!-- app.component.html -->
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">AngularApp</a>-->
 
-<h1>child to parent data->{{Outputdatapass}}</h1>
-<outputcomp (outputdataevent)="outputdata($event)"></outputcomp>
+    <!-- Toggler for mobile navbar -->
+    <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>-->
 
+    <!-- Navbar links and dropdowns -->
+    <!--<div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+        <!-- Home Link -->
+        <!--<li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>-->
+
+        <!-- About Link -->
+        <!--<li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>-->
+
+        <!-- Dropdown menu using Bootstrap -->
+        <!--<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Services
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Web Development</a></li>
+            <li><a class="dropdown-item" href="#">App Development</a></li>
+            <li><a class="dropdown-item" href="#">Consulting</a></li>
+          </ul>
+        </li>-->
+
+        <!-- Materialize Dropdown -->
+        <!--<li>
+          <a class="dropdown-trigger nav-link" href="#" data-target="materializeDropdown">More Options</a>
+        </li>
+      </ul>-->
+
+      <!-- Right side of navbar -->
+      <!--<ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sign Up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>-->
+
+<!-- Materialize Dropdown Structure -->
+<!--<ul id="materializeDropdown" class="dropdown-content">
+  <li><a href="#!">Profile</a></li>
+  <li><a href="#!">Settings</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">Logout</a></li>
+</ul>-->
+
+<!-- Optional: Materialize side navigation for mobile -->
+<!--<ul class="sidenav" id="mobile-demo">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">About</a></li>
+  <li><a href="#">Web Development</a></li>
+  <li><a href="#">App Development</a></li>
+  <li><a href="#">Consulting</a></li>
+</ul>-->
 
 
 

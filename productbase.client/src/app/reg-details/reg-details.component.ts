@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './reg-details.component.html',
   styleUrl: './reg-details.component.css'
 })
-export class RegDetailsComponent {
+export class RegDetailsComponent { 
   registrationForm: FormGroup;
   constructor(private fb: FormBuilder, private registrationService: RegistrationService) {  // Inject the service
     this.registrationForm = this.fb.group({

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace ProductBase.Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]

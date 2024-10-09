@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductBase.Data;
+using ProductBase.Models.Domain;
 using ProductBase.Models.Product;
+using ProductBase.Server.Repositories;
 
 namespace ProductBase.Server.Controllers
 {
@@ -14,22 +17,24 @@ namespace ProductBase.Server.Controllers
     [ApiController]
     public class ProductTypesController : ControllerBase
     {
-        private readonly ProdectDetailesDBContext _context;
+        private readonly IProductTypeRepo _producttyperepo;
 
-        public ProductTypesController(ProdectDetailesDBContext context)
+        public ProductTypesController(IProductTypeRepo producttyperepo)
         {
-            _context = context;
+            _producttyperepo = producttyperepo;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductType>>> Getproducttype()
         {
-            return await _context.producttype.ToListAsync();
+            var producttype = _producttyperepo.GetAllAsync().Result;
+            return Ok(producttype);
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductType>> GetProductType(Guid id)
         {
-            var productType = await _context.producttype.FindAsync(id);
+
+            var productType = await _producttyperepo.GetByIdAsync(id);
 
             if (productType == null)
             {
@@ -39,8 +44,6 @@ namespace ProductBase.Server.Controllers
             return productType;
         }
 
-        // PUT: api/ProductTypes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProductType(Guid id, ProductType productType)
         {
@@ -49,57 +52,49 @@ namespace ProductBase.Server.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(productType).State = EntityState.Modified;
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
-                await _context.SaveChangesAsync();
+                await _producttyperepo.UpdateAsync(productType);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!ProductTypeExists(id))
+                if (!await _producttyperepo.ExistsAsync(id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/ProductTypes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<ProductType>> PostProductType(ProductType productType)
         {
-            _context.producttype.Add(productType);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            return CreatedAtAction("GetProductType", new { id = productType.PTId }, productType);
+            var createdProducttype = await _producttyperepo.AddAsync(productType);
+            return CreatedAtAction(nameof(Getproducttype), new { id = createdProducttype.PTId }, createdProducttype);
         }
 
-        // DELETE: api/ProductTypes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductType(Guid id)
         {
-            var productType = await _context.producttype.FindAsync(id);
-            if (productType == null)
+            var Producttype = await _producttyperepo.GetByIdAsync(id);
+            if (Producttype == null)
             {
                 return NotFound();
             }
 
-            _context.producttype.Remove(productType);
-            await _context.SaveChangesAsync();
-
+            await _producttyperepo.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool ProductTypeExists(Guid id)
-        {
-            return _context.producttype.Any(e => e.PTId == id);
         }
     }
 }

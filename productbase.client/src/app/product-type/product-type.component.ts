@@ -11,7 +11,8 @@ export class ProductTypeComponent {
     ProductTypeName: '',
     ProductTypeDescription: ''
   };
-
+  showAlert: boolean = false;
+  alertMessage: string = ''; 
   constructor(private productTypeService: ProductTypeService) { }
 
   // Method to handle form submission
@@ -19,7 +20,10 @@ export class ProductTypeComponent {
     this.productTypeService.insertProductType(this.productType)
       .subscribe(response => {
         console.log('Product type inserted successfully:', response);
-        // You can reset the form or provide feedback here
+        this.showAlert = true;
+        this.alertMessage = 'Product added successfully!';
+        this.productType.ProductTypeDescription = "";
+        this.productType.ProductTypeName = "";
       }, error => {
         console.error('Error inserting product type:', error);
       });

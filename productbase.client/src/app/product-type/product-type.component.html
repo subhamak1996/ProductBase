@@ -2,7 +2,7 @@
 <div>
   <h2>Insert New Product Type</h2>
   <form (ngSubmit)="onSubmit()">
-    <div>
+    <div class="form-control">
       <label for="name">Product Type Name:</label>
       <input type="text" id="name" [(ngModel)]="productType.ProductTypeName" name="ProductTypeName" required>
     </div>
@@ -14,4 +14,8 @@
 
     <button type="submit">Insert Product Type</button>
   </form>
+  <div *ngIf="showAlert" class="alert alert-success" style="color:red">
+    {{ alertMessage }}
+  </div>
+  <app-get-product-type></app-get-product-type>
 </div>

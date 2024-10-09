@@ -2,48 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductBase.Data;
 using ProductBase.Models.Product;
+using ProductBase.Server.Repositories;
+using ProductBase.Server.ResponseDTO;
 
 namespace ProductBase.Server.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ProductDetailsController : ControllerBase
     {
         private readonly ProdectDetailesDBContext _context;
+        private readonly IProductDetailsRepo _productDetailsRepo;
 
-        public ProductDetailsController(ProdectDetailesDBContext context)
+        public ProductDetailsController(ProdectDetailesDBContext context, IProductDetailsRepo productDetailsRepo)
         {
             _context = context;
+            _productDetailsRepo= productDetailsRepo;
         }
-
-        // GET: api/ProductDetails
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDetails>>> Getproductdetails()
+        public async Task<ActionResult<IEnumerable<ProductDetailsDTO>>> GetProductDetails()
         {
-            return await _context.productdetails.ToListAsync();
+            var productDetails = await _productDetailsRepo.GetAllAsync();
+            return Ok(productDetails);
         }
 
-        // GET: api/ProductDetails/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDetails>> GetProductDetails(Guid id)
         {
-            var productDetails = await _context.productdetails.FindAsync(id);
-
-            if (productDetails == null)
-            {
-                return NotFound();
-            }
-
+            var productDetails = await _productDetailsRepo.GetByIdAsync(id);           
             return productDetails;
         }
-
-        // PUT: api/ProductDetails/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProductDetails(Guid id, ProductDetails productDetails)
         {
@@ -51,58 +46,47 @@ namespace ProductBase.Server.Controllers
             {
                 return BadRequest();
             }
-
-            _context.Entry(productDetails).State = EntityState.Modified;
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
-                await _context.SaveChangesAsync();
+                await _productDetailsRepo.UpdateAsync(productDetails);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!ProductDetailsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
-
-            return NoContent();
+            return NoContent();          
         }
 
-        // POST: api/ProductDetails
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<ProductDetails>> PostProductDetails(ProductDetails productDetails)
         {
-            _context.productdetails.Add(productDetails);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProductDetails", new { id = productDetails.PDId }, productDetails);
+           if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var productdetails=_productDetailsRepo.AddAsync(productDetails);  
+            return CreatedAtAction(nameof(GetProductDetails), new { id = productdetails.Id}, productdetails);
         }
 
-        // DELETE: api/ProductDetails/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductDetails(Guid id)
         {
-            var productDetails = await _context.productdetails.FindAsync(id);
+            var productDetails = await _productDetailsRepo.GetByIdAsync(id);
             if (productDetails == null)
             {
                 return NotFound();
             }
-
-            _context.productdetails.Remove(productDetails);
-            await _context.SaveChangesAsync();
-
+           await _productDetailsRepo.DeleteAsync(id);
             return NoContent();
         }
 
-        private bool ProductDetailsExists(Guid id)
-        {
-            return _context.productdetails.Any(e => e.PDId == id);
-        }
+        //private bool ProductDetailsExists(Guid id)
+        //{
+        //    return _context.productdetails.Any(e => e.PDId == id);
+        //}
     }
 }
