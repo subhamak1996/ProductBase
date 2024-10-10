@@ -8,7 +8,7 @@ import { GetProductTypeService } from '../services/get-product-type.service';
   styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent {
-  productTypes: any[] = [];  // Array to store product types
+  productTypes: any[] = [];  
   errorMessage: string = '';
   Product = {
     PTId: '',
@@ -30,7 +30,7 @@ export class ProductDetailsComponent {
         (data) => { this.productTypes = data; },
         (error) => {
           console.error('Error fetching product types:', error);
-          this.errorMessage = 'Could not load product types. Please try again later.';
+          this.errorMessage = 'Could not load product types. Please try again lat er.';
         }
       );
   }
@@ -48,11 +48,11 @@ export class ProductDetailsComponent {
       console.error('Error inserting product type:', error);
     });
   }
-  generateGuid(): string {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      const r = (Math.random() * 16) | 0;
-      const v = c === 'x' ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
-  }
+  //generateGuid(): string {
+  //  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+  //    const r = (Math.random() * 16) | 0;
+  //    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+  //    return v.toString(16);
+  //  });
+  //}
 }

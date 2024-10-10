@@ -7,9 +7,22 @@ using Microsoft.IdentityModel.Tokens;
 using ProductBase.Data;
 using ProductBase.Server.CustomMiddleware;
 using ProductBase.Server.Repositories;
+using Serilog;
+using Serilog.Formatting.Json;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+var logDirectory = "F:\\subhamPractice.net";
+if (!Directory.Exists(logDirectory))
+{
+    Directory.CreateDirectory(logDirectory);
+}
+builder.Host.UseSerilog((context, config) => {
+    config
+        .MinimumLevel.Information()
+        .WriteTo.Console(new JsonFormatter()) // Log in JSON format to the console
+        .WriteTo.File(new JsonFormatter(), Path.Combine(logDirectory, "log-.json"), rollingInterval: RollingInterval.Day); // Log in JSON format to files
+});
 builder.Services.AddDbContext<ProdectDetailesDBContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("ProductConnString")));
 builder.Services.AddTransient<IRegistrationRepo, RegistrationRepo>();
@@ -47,7 +60,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 });
 // other service configurations like AddControllers, etc.
 var app = builder.Build();
-
+app.UseSerilogRequestLogging();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
@@ -67,3 +80,17 @@ app.MapControllers();
 app.MapFallbackToFile("/index.html");
 
 app.Run();
+try
+{
+    Log.Information("Starting up the application");
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "The application failed to start correctly");
+    throw;
+}
+finally
+{
+    Log.CloseAndFlush();
+}

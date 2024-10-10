@@ -18,19 +18,24 @@ namespace ProductBase.Server.Controllers
     [ApiController]
     public class ProductDetailsController : ControllerBase
     {
+        private readonly ILogger<ProductDetailsController> _logger;
         private readonly ProdectDetailesDBContext _context;
         private readonly IProductDetailsRepo _productDetailsRepo;
 
-        public ProductDetailsController(ProdectDetailesDBContext context, IProductDetailsRepo productDetailsRepo)
+        public ProductDetailsController(ProdectDetailesDBContext context, IProductDetailsRepo productDetailsRepo, ILogger<ProductDetailsController> logger)
         {
             _context = context;
-            _productDetailsRepo= productDetailsRepo;
+            _productDetailsRepo = productDetailsRepo;
+            _logger = logger;
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDetailsDTO>>> GetProductDetails()
         {
+            _logger.LogInformation("Start Handling GET request for ProductDetailsController");
             var productDetails = await _productDetailsRepo.GetAllAsync();
+            _logger.LogInformation("End Handling GET request for ProductDetailsController");
             return Ok(productDetails);
+            
         }
 
         [HttpGet("{id}")]
