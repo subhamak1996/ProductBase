@@ -1,0 +1,20 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4" style="width: 400px;">
+    <h3 class="text-center mb-4">Login</h3>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group mb-3">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="LoginDetail.username" name="email" placeholder="Enter email" required>
+      </div>
+      <div class="form-group mb-3">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" [(ngModel)]="LoginDetail.password" name="password" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block w-100">Login</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <p>Don't have an account? <a routerLink="/RegDetails">Register here</a></p>
+    </div>
+  </div>
+</div>

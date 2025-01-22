@@ -12,6 +12,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { InputCompComponent } from './input-comp/input-comp.component';
 import { OutputCompComponent } from './output-comp/output-comp.component';
 import { GetProductDetailsComponent } from './get-product-details/get-product-details.component';
+import { LoginComponent } from './login/login.component';
+import { HomeCompComponent } from './home-comp/home-comp.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { GetProductDetailsComponent } from './get-product-details/get-product-de
     InputCompComponent,
     OutputCompComponent,
     GetProductDetailsComponent,
+    LoginComponent,
+    HomeCompComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,
